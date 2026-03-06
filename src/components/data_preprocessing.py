@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from data_ingestion import DataIngestion
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
@@ -14,7 +13,7 @@ class DataPreprocessing:
         y=data['Loan_Status']
 
         cat_cols=X.select_dtypes(include='object').columns
-        num_cols=X.select_dtypes(include='object').columns
+        num_cols=X.select_dtypes(exclude='object').columns
 
         num_pipeline=Pipeline([
             ('missing_values',SimpleImputer(strategy='median')),
